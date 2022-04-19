@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assignment | 3</title>
+        <style>
+        #firstdiv
+         {
+            border:orange; 
+            border-width:3px; 
+            border-style:solid;
+            background-color: aqua;
+            text-align: center;
+           font-style: italic;
+           font-size: 30px;
+           color: brown;
+         }
+
+         #seconddiv
+         {
+            border:rebeccapurple; 
+            border-width:3px; 
+            border-style:solid;
+            background-color: palevioletred;
+            padding-left: 440px;
+            font-family: Georgia;
+         }
+         #thirddiv{
+            border:orange; 
+            border-width:3px; 
+            border-style:solid;
+            background-color: aqua;
+            text-align: center;
+           font-style: italic;
+           font-size: 30px;
+           color: brown;
+         }
+        </style>
+        <script type="text/javascript">
+            function validate()
+            {
+               //fetch the name deatil and simply pass that detail through DOM object Model.
+               var firstname=document.getElementById("fname").value;
+               document.getElementById("ferror").innerHTML=firstname;
+
+               //fetch the number detail and simple check that the number is odd or even.
+               var num=document.getElementById("adnumber").value;
+               if(num%2==0)
+               {
+                document.getElementById("odd_even").innerHTML="EVEN";
+               }else{
+                document.getElementById("odd_even").innerHTML="ODD";
+               }
+               return false;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="firstdiv">
+            <h1><u>Mindtree Assignment-3</u> &nbsp;&nbsp;</h1>
+        </div>
+        <br>
+        <br>
+        <form action="#" id="form1" onsubmit="return validate();">
+        <div id="seconddiv">
+            <label for="fname"><b style="font-size: 20px;">Name:</b></label>&nbsp;&nbsp;
+            <input type="text" id="fname" name="fname" class="inputbox" placeholder="Enter name"  required><br>
+            <br>
+            <label for="fname"><b style="font-size: 20px;">Check ODD/EVEN Number:</b></label>&nbsp;&nbsp;
+            <input type="number" name="adnumber" id="adnumber" class="name" placeholder="Enter a Number" required><br>
+            <span id="aerror" style="color: red;font-weight: bold;"></span>
+            <br>
+            <br>
+            <button type="submit"  value="Submit" id="butt" style="font-size: 20px; border-radius: 5px; background-color: aqua;">Submit</button>&nbsp;&nbsp;
+            <button type="reset"  value="reset" id="butt1" style="font-size: 20px; border-radius: 5px; background-color: orange;">Reset</button>
+        </div>
+        </form>
+        <br>
+        <br>
+        <div id="thirddiv">
+            <h2><u>OUTPUT</u></h2>
+            <h2>Name: <span id="ferror" style="color: red;"> </span></h2>
+            <h2>The ODD/EVEN result is: <span id="odd_even" style="color: red;"> </span></h2>
+        </div>
+    </body>
+</html>

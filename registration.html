@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Registration Page</title>
+      <style>
+
+         #firstdiv
+         {
+            border:orange; 
+            border-width:3px; 
+            border-style:solid;
+            background-color: aqua;
+            text-align: center;
+           font-style: italic;
+           font-size: 30px;
+           color: brown;
+         }
+
+         #seconddiv,#locationdiv
+         {
+            border:rebeccapurple; 
+            border-width:3px; 
+            border-style:solid;
+            background-color: palevioletred;
+            padding-left: 440px;
+            font-family: Georgia;
+         }
+
+         #thirddiv
+         {
+            border:red; 
+            border-width:3px; 
+            border-style:solid;
+            background-color: greenyellow;
+            padding-left: 440px;
+            font-style: arial;
+            font-family: sans-serif;
+         }
+         #tabledata
+         {
+            border:royalblue; 
+            border-width:3px; 
+            border-style:solid;
+            background-color:gold;
+            
+            padding-left: 440px;
+         }
+        table, th, td 
+        {
+          border: 1px solid black;
+        }
+        td
+        {
+          font-weight: bold;
+        }
+
+      </style>
+
+      <script>
+        
+         //declare lists globally.
+          var list1=[];
+          var list2=[];
+          var list3=[];
+          var list4=[];
+          var list5=[];
+          
+          //create a global variable n & x asign it to 1 and 0.
+          var n=1;
+          var x=0;
+
+          let object1={
+            "student":[]
+          }
+
+          function validate()
+          {
+            //create new row through fetch the table tag id.
+            var AddRown=document.getElementById("show");
+            //new row is created
+            var NewRow=AddRown.insertRow(n);
+
+            // fetch the deatils from input field.
+             list1[x]=document.getElementById("fname").value;
+             var ele=document.getElementsByName("gender");
+             list3[x]=document.getElementById("fdate").value;
+             list4[x]=document.getElementById("flocation").value;
+             var track=document.getElementsByName("course");
+             
+             var fvalidate= /^[a-zA-Z ]{2,30}$/;
+             if(fvalidate.test(list1[x]))
+              {
+                  
+              }
+              else{
+                //document.getElementById("ferror").innerHTML="** Invalid First Name";
+                alert("Invalid name plz enter vaild name");
+                return false;
+              }
+
+           //check data from radio button
+           // var y;
+            for(let i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                list2[x]=ele[i].value;
+            }
+          
+
+            //checked data from check box.
+            //var x;
+            for(let i = 0; i < track.length; i++) {
+                if(track[i].checked)
+                list5[x]=track[i].value;
+            }
+
+            let flag=0;
+            for(let i=0;i<object1.student.length;i++){
+              if(object1.student[i]["name"]==list1[x] && object1.student[i]["gen"]==list2[x] && object1.student[i]["dob"]==list3[x] && object1.student[i]["location"]==list4[x]
+              && object1.student[i]["track"]==list5[x])
+              {
+                  flag=1;
+                  break;
+              }
+            }
+           
+            if(flag==0)
+            {
+
+            const newstudent={"name":list1[x],"gen":list2[x],"dob":list3[x],"location":list4[x],"track":list5[x]};
+            object1.student.push(newstudent);
+
+            //create new cells
+            var cel1=NewRow.insertCell(0);
+            var cel2=NewRow.insertCell(1);
+            var cel3=NewRow.insertCell(2);
+            var cel4=NewRow.insertCell(3);
+            var cel5=NewRow.insertCell(4);
+             
+            //Assign value on a particular cell
+            cel1.innerHTML=list1[x];
+            cel2.innerHTML=list2[x];
+            cel3.innerHTML=list3[x];
+            cel4.innerHTML=list4[x];
+            cel5.innerHTML=list5[x];
+
+            //check cell 5 is SDET digital or not.
+            //if digitial change it to darkgreen color.
+            if(list5[x] == "SDET Digital")
+            {
+              cel5.setAttribute("style", "color:darkgreen");
+              
+            }
+
+           
+            //increment n and x.
+            n++;
+            x++;
+          }else{
+            alert("This data already present");
+          }
+
+            return false;
+          }
+
+          //for finding how many times the the location have.
+          function findLoc()
+          {
+            var location=document.getElementById("locname").value;
+            var count=0;
+            for(let i=0;i<object1.student.length;i++)
+            {
+              if(object1.student[i]["location"].toLowerCase() == location.toLowerCase())
+              {
+                count++;
+              }
+            }
+           
+            alert("Total Location "+location+" is "+count);
+            return false;
+          }
+
+      </script>
+
+    </head>
+
+
+    <body>
+       
+      <!--Define heading here-->
+         <div id="firstdiv">
+            <h1><u>Student Application Form</u> &nbsp;&nbsp; </h1>
+        </div>
+
+    <br>
+
+    <!--create from start-->
+
+    <form action="#" id="form1" method="post"  onsubmit="return validate();">
+          
+        <!-- Name Defined--->
+        <div id="seconddiv">
+        <label for="fname"><b style="font-size: 20px;">Name:</b></label>&nbsp;&nbsp;
+        <input type="text" id="fname" name="fname" class="inputbox" placeholder="Enter name"  required><br>
+        <br>
+
+        <!-- Gender Defined--->
+        <label><b style="font-size: 20px;">Gender:</b></label>&nbsp;&nbsp;
+        <label for="gen"><b style="font-size: medium; "> Male</b></label>
+        <input type="radio" name="gender" id="male" value="male" class="inputbox" required/>
+        <label for="gen"><b style="font-size: medium;">Female</b></label>
+        <input type="radio" name="gender" id="female" value="female" class="inputbox" required/>
+        <br>
+        <br>
+
+        <!-- Date of Birth Defined--->
+        <label><b style="font-size: 20px;">Date of Birth:</b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="date" id="fdate" name="fdate" class="inputbox" placeholder="Date"  required>
+        </div>
+        <br>
+
+         <!--Location Defined-->
+        <div id="thirddiv">
+        <label for="loc"><b style="font-size: 20px;">Location:</b></label>&nbsp;&nbsp;
+        <input type="text" id="flocation" name="fname" class="inputbox" placeholder="location" required><br>
+        <br>
+
+        <!--Track Defined-->
+        <label><b style="font-size: 20px;">Track:</b></label>&nbsp;&nbsp;
+        <label for="track"><b style="font-size: medium;">SDET Digital</b></label>
+        <input type="checkbox" name="course" id="sdetdigital" value="SDET Digital" class="inputbox"  />&nbsp;&nbsp;
+
+
+        <label for="track"><b style="font-size: medium; ">SDET Java</b></label>
+        <input type="checkbox" name="course" id="sdetjava" value="SDET Java" style="padding-left: 60px;" class="inputbox"/>&nbsp;&nbsp;
+
+
+        <label for="track"><b style="font-size: medium;">Others</b></label>
+        <input type="checkbox" name="course" id="others" value="Others" class="inputbox" />&nbsp;&nbsp;
+
+        <br>
+        <br>
+        <!--Define submit and reset button here-->
+
+        <button type="submit"  value="Submit" id="butt" style="font-size: 20px; border-radius: 5px; background-color: aqua;" >Submit</button>&nbsp;&nbsp;
+        <button type="reset"  value="Reset" id="butt" style="font-size: 20px; border-radius: 5px; background-color: aqua;">Reset</button>
+
+
+        <br>
+        <br>
+
+        </div>
+    </form>
+    <!--form tag ended here-->
+
+    <br>
+    <br>
+    <div id="locationdiv">
+      <form action="#" onsubmit="return findLoc()" method="post">
+      <label for="locname"><b style="font-size: 20px;">Enter location:</b></label>&nbsp;&nbsp;
+      <input type="text" id="locname" name="locname" class="inputbox" placeholder="Enter your location"  ><br>
+      <br>
+      <button type="submit"  value="Submit" id="butt" style="font-size: 20px; border-radius: 5px; background-color: aqua;"  required>Count Loc</button>&nbsp;&nbsp;
+      </form>
+    </div>
+
+    <br>
+    <br>
+
+    <div id="tabledata">
+
+      <!-- Table Defined--->
+        <table id="show" >
+          <thead>
+            <tr>
+              <th style="background-color: rebeccapurple ;font-family: sans-serif;font-size: 25px;">Name</th>
+              <th style="background-color: aqua;font-family: sans-serif;font-size: 25px;">Gender</th>
+              <th style="background-color: orange;font-family: sans-serif;font-size: 25px;">Age</th>
+              <th style="background-color: palevioletred;font-family: sans-serif;font-size: 25px;">Location</th>
+              <th style="background-color: gray;font-family: sans-serif;font-size: 25px;">Track</th>
+            </tr>
+            </thead>
+              
+          </table>
+
+    </div>
+
+    </body>
+    </html>
+
+
+    <!--<select id="age" name="age" required>
+      <option>select age</option>
+      <option>18</option>
+      <option>19</option>
+      <option>20</option>
+      <option>21</option>
+      <option>22</option>   
+      <option>23</option>
+      <option>24</option>
+      <option>25</option>
+      <option>26</option>
+      <option>27</option>
+      <option>28</option>
+      <option>29</option>
+      <option>30</option>
+      <option>31</option>
+      <option>32</option>  
+       </select>
+      
+
+            <tr>
+              <td  style="background-color: rebeccapurple;"><span id="name"></span></td>
+              <td  style="background-color: aqua"><span id="gender"></span></td>
+              <td  style="background-color: orange;"><span id="age"></span></td>
+              <td  style="background-color: palevioletred;"><span id="location"></span></td>
+              <td  style="background-color: gray;"><span id="track"></span></td>
+            </tr>
+
+            //set attribute in table td tag inside using span tag.
+            /*document.getElementById("name").innerHTML=name;
+            document.getElementById("gender").innerHTML=y;
+            document.getElementById("age").innerHTML=dob;
+            document.getElementById("location").innerHTML=location;
+            document.getElementById("track").innerHTML=x;
+           
+            // check the track is sdet digital or not.
+            if(x == "SDET Digital")
+            {
+              var heading = document.getElementById("track");
+              heading.setAttribute("style", "color:darkgreen");
+              
+            }
+
+
+
+            var rowCount = 0;
+            var table = document.getElementById("show");
+            var rows = table.getElementsByTagName("tr");
+            for (var i = 0; i < rows.length; i++) {
+            //totalRowCount++;
+            if (rows[i].getElementsByTagName("td").length > 0) {
+                rowCount++;
+              }
+            }
+
+
+          for(let j=0;j<rowCount;j++)
+          {
+            if(list1[j].value==list1[x])
+            {
+              alert("This value already exists.");
+            }
+          }
+            */
+ -->
